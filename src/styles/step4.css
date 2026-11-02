@@ -91,3 +91,11 @@ button.s4-coin { cursor: pointer; }
 
 /* 이야기 문제 */
 .s4-story { max-width: 88%; padding: 3cqh 4cqh; font-size: 5.2cqh; line-height: 1.5; color: #5b4636; text-align: center; word-break: keep-all; background: rgb(255 255 255 / 78%); border-radius: 3cqh; }
+
+/* 시계 맞추기: 시계와 보기를 크게 */
+.s4-clockq { gap: 2.4cqh; }
+.s4-clockq .s3-col { gap: 1.6cqh; }
+.s4-clockq .s4-clock { width: 50cqh; height: 50cqh; }
+.s4-clockq .opts.wide { gap: 3cqh; }
+.s4-clockq .opts.wide .opt { padding: 1.6cqh 4.5cqh 2cqh; }
+.s4-clockq .opts.wide .opt b { font-size: 10cqh; }

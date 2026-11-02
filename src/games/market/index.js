@@ -21,6 +21,7 @@ function clockChoices(hr, min) {
 const clockGame = makeChoiceGame({
   key: 'clock',
   wide: true,
+  layout: 's4-clockq', // 시계와 보기를 크게 (step4.css)
   background: 'market-base',
   levels: [['read'], ['set'], ['half']],
   build({ range: [mode] }) {

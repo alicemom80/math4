@@ -3,12 +3,11 @@
 //   setup(ctx): 그림을 화면에 넣은 뒤 부른다 (눌러 세기 등). ctx = { run, say, sfx, bubble }
 //   onTry(value): 보기를 누를 때마다 부른다 (맞고 틀림과 상관없이 그림을 바꿀 때)
 import { h } from '@공통/widgets/dom.js';
-import { wait, shuffle, PRAISE } from '@공통/games/logic.js';
+import { wait, shuffle, PICK_PRAISE } from '@공통/games/logic.js';
 import { numberButtons, pickHandler } from '@공통/games/widgets.js';
 
 const HINT_MS = 1600;
-// 고르기 게임이라 "세었네" 칭찬은 뺀다
-export const PICK_PRAISE = Object.freeze(PRAISE.filter((p) => !/세었|셌|세어/.test(p)));
+export { PICK_PRAISE }; // 고르기 게임의 기본 칭찬 (눌러 세는 게임은 praise로 COUNT_PRAISE를 준다)
 
 /** 정답과 다른 보기 (범위 안, 겹치지 않게) count-1개 + 정답 */
 export function withDistractors(answer, candidates, lo = null, hi = null, count = 3) {
@@ -17,12 +16,12 @@ export function withDistractors(answer, candidates, lo = null, hi = null, count 
   return [answer, ...shuffle(others).slice(0, count - 1)];
 }
 
-export function makeChoiceGame({ key, background, levels, build, wide = false, keepOrder = false, layout = '' }) {
+export function makeChoiceGame({ key, background, levels, build, wide = false, keepOrder = false, layout = '', praise = PICK_PRAISE }) {
   return {
     key,
     background,
     levels,
-    praise: PICK_PRAISE,
+    praise,
     ask(play, { run, say, bubble, sfx }, info) {
       const q = build(info);
       const values = keepOrder ? q.options : shuffle(q.options);

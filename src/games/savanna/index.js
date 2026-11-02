@@ -1,6 +1,6 @@
 // 사바나 마을 게임 3종: 바나나 묶음 세기, 10개 모아 묶기, 100 숫자판 빈칸
 import { h, art } from '@공통/widgets/dom.js';
-import { randInt } from '@공통/games/logic.js';
+import { randInt, COUNT_PRAISE } from '@공통/games/logic.js';
 import { makeChoiceGame, withDistractors } from '../choice.js';
 import { bundles } from '../visuals.js';
 import { board100, tapToCountBundles4 } from '../visuals4.js';
@@ -20,6 +20,7 @@ const bigChoices = (n) => withDistractors(n, [n - 10, n + 10, n - 1, n + 1, swap
 const bunchGame = makeChoiceGame({
   key: 'bunch',
   background: 'savanna-base',
+  praise: COUNT_PRAISE, // 바나나 묶음을 눌러 세는 게임
   levels: [[51, 70, true], [51, 100, true], [51, 100, false]],
   build({ range: [lo, hi, withPictures], last }) {
     let n = randInt(lo, hi);
