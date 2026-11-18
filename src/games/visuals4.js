@@ -1,4 +1,5 @@
 // 4단계 그림 조각: 수직선, 100 숫자판, 동전, 바늘 시계, 짝 지은 알, 묶음 세기
+import { toStageDelta } from '../rotation.js';
 import { h, art } from '@공통/widgets/dom.js';
 import { nativeCount } from '@공통/games/numbers.js';
 import { markCount } from '@공통/games/shared/counting.js';
@@ -127,7 +128,8 @@ export function analogClock(hour, minute = 0, { onSet } = {}) {
     let drag = false;
     const move = (e) => {
       const r = el.getBoundingClientRect();
-      const deg = ((Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180) / Math.PI + 360) % 360;
+      const v = toStageDelta(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+      const deg = ((Math.atan2(v.dx, -v.dy) * 180) / Math.PI + 360) % 360;
       setHour(Math.round(deg / 30) % 12 || 12);
     };
     el.addEventListener('pointerdown', (e) => { drag = true; el.setPointerCapture?.(e.pointerId); move(e); });
